@@ -1,0 +1,8 @@
+/* based on this number the footer will be pushed to the bottom */
+main {
+  min-height: 80vh;
+}
+
+.test {
+  background-color: aqua;
+}
