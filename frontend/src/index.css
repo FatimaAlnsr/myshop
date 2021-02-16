@@ -3,6 +3,6 @@ main {
   min-height: 80vh;
 }
 
-.test {
-  background-color: aqua;
+.light {
+  background-color: rgb(240, 231, 231);
 }
