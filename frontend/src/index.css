@@ -4,5 +4,14 @@ main {
 }
 
 .light {
-  background-color: rgb(240, 231, 231);
+  background-color: rgb(248, 241, 241);
+}
+
+h3 {
+  padding: 1rem 0;
+  font-size: large;
+}
+
+.rating span {
+  margin: 0.1rem;
 }
