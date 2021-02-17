@@ -7,6 +7,10 @@ main {
   background-color: rgb(248, 241, 241);
 }
 
+h2 {
+  font-size: x-large;
+}
+
 h3 {
   padding: 1rem 0;
   font-size: large;
