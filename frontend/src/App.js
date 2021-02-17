@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from './components/essentials/Header'
 import Footer from './components/essentials/Footer'
-import HomeScreen from './screens/home/homeScreen'
+import HomeScreen from './screens/home/HomeScreen'
 import ProductScreen from './screens/products/ProductScreen'
 
 const App = () => {
