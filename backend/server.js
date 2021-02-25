@@ -1,8 +1,9 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const colors = require('colors')
+const { notFound, errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
-const products = require('./data/products')
+const product = require('./routes/product')
 
 dotenv.config()
 
@@ -14,14 +15,13 @@ app.get('/', (req, res) => {
   res.send('API is running')
 })
 
-app.get('/api/products', (req, res) => {
-  res.json(products)
-})
+app.use('/api/products', product)
 
-app.get('/api/products/:id', (req, res) => {
-  const product = products.find((p) => p._id === req.params.id)
-  res.json(product)
-})
+//if the user enter a url that doesnt exist this error handler will handle it
+app.use(notFound)
+//This error handler doesnt seem to catch anything since iam using try/catch/
+//will keep it for a while and see if there is any use to it!
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
