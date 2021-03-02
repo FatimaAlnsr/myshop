@@ -3,9 +3,12 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../../components/product/Rating'
+import { useDispatch } from 'react-redux'
+import { getProducts } from '../../features/productsSlice'
 import products from '../../products'
 
 const ProductScreen = ({ match }) => {
+  const dispatch = useDispatch()
   const currency = 'BHD'
   const [product, setProduct] = useState({})
 
@@ -14,6 +17,7 @@ const ProductScreen = ({ match }) => {
       const { data } = await axios.get(`/api/products/${match.params.id}`)
       setProduct(data)
     }
+
     fetchProduct()
   }, [match])
   return (
