@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../../components/product/Product'
 import { getProducts } from '../../features/productsSlice'
+import Loader from '../../components/essentials/Loader'
+import Message from '../../components/essentials/Message'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -16,10 +18,8 @@ const HomeScreen = () => {
   let content
 
   if (products.status === 'loading') {
-    content = <div>...Loading</div>
-  } else if (products.status === ' failed') {
-    content = <div>{products.error}</div>
-  } else {
+    content = <Loader />
+  } else if (products.status === 'success') {
     content = (
       <Row>
         {products.items.map((product) => (
@@ -28,6 +28,16 @@ const HomeScreen = () => {
           </Col>
         ))}
       </Row>
+    )
+    //This failed so far doesn't work reasons ? no idea
+    //need more attention
+  } else if (products.status === ' failed') {
+    content = <Message>{products.error}</Message>
+  } else {
+    content = (
+      <Message>
+        No Products Available at the moment, Please try again later!
+      </Message>
     )
   }
 

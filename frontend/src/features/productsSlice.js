@@ -7,12 +7,8 @@ const products = { items: [], status: null, error: null }
 export const getProducts = createAsyncThunk(
   'products/getProducts',
   async () => {
-    try {
-      const { data } = await axios.get('api/products')
-      return data
-    } catch (error) {
-      return error
-    }
+    const response = await axios.get('api/products')
+    return response.data
   }
 )
 
@@ -29,13 +25,13 @@ const productSlice = createSlice({
     [getProducts.pending]: (state) => {
       state.status = 'loading'
     },
-    [getProducts.fulfilled]: (state, action) => {
-      state.status = 'sucess'
-      state.items = action.payload
-    },
     [getProducts.rejected]: (state, action) => {
       state.status = 'failed'
       state.error = action.error.message
+    },
+    [getProducts.fulfilled]: (state, action) => {
+      state.status = 'success'
+      state.items = action.payload
     },
   },
 })

@@ -7,7 +7,7 @@ import { productReducer } from './features/productsSlice'
 
 const middleware = [...getDefaultMiddleware()]
 
-const initialState = []
+const initialState = {}
 
 const store = configureStore({
   reducer: {

@@ -8,7 +8,10 @@ const Product = require('../models/productModel')
 //@access Public
 router.get('/', async (req, res) => {
   try {
+    // i guess we can exclude the description here as we retrive it but never use it
     const products = await Product.find({})
+    // res.status(401)
+    // throw new Error('Not Authorized')
     res.json(products)
   } catch (error) {
     res.status(500).json({ message: 'internal server Error' })
