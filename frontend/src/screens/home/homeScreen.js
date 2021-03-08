@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
-import { selectAllProducts } from '../../features/productsSlice'
+import { selectAllProducts, getProducts } from '../../features/productsSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../../components/product/Product'
-import { getProducts } from '../../features/productsSlice'
 import Loader from '../../components/essentials/Loader'
 import Message from '../../components/essentials/Message'
 
@@ -31,14 +30,14 @@ const HomeScreen = () => {
     )
     //This failed so far doesn't work reasons ? no idea
     //need more attention
-  } else if (products.status === ' failed') {
-    content = <Message>{products.error}</Message>
   } else {
-    content = (
-      <Message>
-        No Products Available at the moment, Please try again later!
-      </Message>
-    )
+    content = <Message>{products.error}</Message>
+    // } else {
+    //   content = (
+    //     <Message>
+    //       No Products Available at the moment, Please try again later!
+    //     </Message>
+    //   )
   }
 
   return (
