@@ -3,17 +3,20 @@ import {
   getDefaultMiddleware,
   combineReducers,
 } from '@reduxjs/toolkit'
-import { productReducer, ProductDetailsReducer } from './features/productsSlice'
+import { productReducer } from './features/productsSlice'
+import { ProductDetailsReducer } from './features/productSlice'
 
 const middleware = [...getDefaultMiddleware()]
 
 const initialState = {}
 
+const reducer = combineReducers({
+  productList: productReducer,
+  productDetails: ProductDetailsReducer,
+})
+
 const store = configureStore({
-  reducer: {
-    productList: productReducer,
-    productDetails: ProductDetailsReducer,
-  },
+  reducer,
   initialState,
   middleware,
 })
