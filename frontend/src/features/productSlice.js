@@ -30,7 +30,6 @@ const productDetailsSlice = createSlice({
     },
     [getProductDetails.rejected]: (state, action) => {
       state.status = 'failed'
-      console.log(action.payload)
       state.error = action.payload.items
     },
     [getProductDetails.fulfilled]: (state, action) => {
