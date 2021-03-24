@@ -9,19 +9,29 @@ import {
   getProductDetails,
   selectProductDetails,
 } from '../../features/productSlice'
+import { addingToCart, selectCart } from '../../features/cartSlice'
 
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1)
+  const itemId = match.params.id
   const dispatch = useDispatch()
   const { items: product, status, error } = useSelector(selectProductDetails)
   const currency = 'BHD'
+  const { cartItems } = useSelector(selectCart)
 
   useEffect(() => {
     dispatch(getProductDetails({ productId: match.params.id }))
   }, [match])
 
+  useEffect(() => {
+    if (cartItems) {
+      localStorage.setItem('cartItems', JSON.stringify(cartItems))
+    }
+  }, [cartItems])
+
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
+    //history.push(`/cart/${match.params.id}?qty=${qty}`)
+    dispatch(addingToCart({ itemId, qty }))
   }
 
   let content

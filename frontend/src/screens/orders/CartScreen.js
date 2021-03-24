@@ -1,33 +1,17 @@
-import React, { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addingToCart, selectCart } from '../../features/cartSlice'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../../components/essentials/Message'
 
-const CartScreen = ({ match, history }) => {
+const CartScreen = ({ history }) => {
   const currency = 'BHD'
-  const location = useLocation()
   //to get the qty from the url
-  const qty = new URLSearchParams(location.search).get('qty')
-  const itemId = match.params.id
+  // const qty = new URLSearchParams(location.search).get('qty')
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (itemId) {
-      dispatch(addingToCart({ itemId, qty }))
-    }
-  }, [dispatch, itemId, qty])
-
   const { cartItems } = useSelector(selectCart)
-
-  console.log(cartItems)
-
-  useEffect(() => {
-    if (cartItems) {
-      localStorage.setItem('cartItems', JSON.stringify(cartItems))
-    }
-  }, [cartItems])
 
   const removeFromCartHandler = () => {}
 
@@ -97,12 +81,16 @@ const CartScreen = ({ match, history }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+                Subtotal (
+                {cartItems.reduce((acc, item) => acc + Number(item.qty), 0)})
                 items
               </h2>
               {currency}{' '}
               {cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .reduce(
+                  (acc, item) => acc + Number(item.qty) * Number(item.price),
+                  0
+                )
                 .toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
