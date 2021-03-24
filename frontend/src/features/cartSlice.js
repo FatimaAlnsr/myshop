@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getProductDetails } from './productSlice'
 
 //the initial state for the local storage .. maybe i need to delete it later
@@ -31,6 +31,7 @@ export const addingToCart = createAsyncThunk(
       name: data.name,
       image: data.image,
       price: data.price,
+      countInStock: data.countInStock,
       qty,
     }
 
@@ -47,9 +48,7 @@ const cartSlice = createSlice({
       //takes the given item and check if it already exist inside the sorage if not it will simply add it
       //if its available it will replace it with the new one --- Note its not adding it but replacing
       const item = action.payload
-      console.log(current(state.cartItems))
       const existItem = state.cartItems.find((x) => x.itemId === item.itemId)
-      console.log(existItem)
       if (existItem) {
         state.cartItems = state.cartItems.map((x) =>
           x.itemId === existItem.itemId ? item : x
